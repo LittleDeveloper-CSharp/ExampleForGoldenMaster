@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -72,10 +73,15 @@
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\ClientService.cs" />
     <Compile Include="Model\ContextModel.cs" />
+    <Compile Include="Model\Discount.cs" />
     <Compile Include="Model\Service.cs" />
     <Compile Include="ViewModel\Command\CommonCommand.cs" />
+    <Compile Include="ViewModel\ViewModelAddAndEdit.cs" />
     <Compile Include="ViewModel\ViewModelCommon.cs" />
     <Compile Include="ViewModel\ViewModelMainWindow.cs" />
+    <Compile Include="Views\EditAndAddWindow.xaml.cs">
+      <DependentUpon>EditAndAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -107,8 +113,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Resource Include="Resources\beauty_logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\EditAndAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

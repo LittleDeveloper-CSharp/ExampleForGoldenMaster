@@ -43,6 +43,15 @@ namespace ExampleForGoldenMaster.Model
         [NotMapped]
         public int TotalCost { get; set; }
         
+        [NotMapped]
+        public string ColorBackground { get; set; }
+
+        [NotMapped]
+        public int DurationInMinutes { get; set; }
+
+        [NotMapped]
+        public Visibility VisibilityButtonForEdit { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientService> ClientServices { get; set; }
     }

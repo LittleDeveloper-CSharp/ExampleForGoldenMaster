@@ -14,11 +14,16 @@ namespace ExampleForGoldenMaster.ViewModel.Command
             this.func = func;
         }
 
-        public event EventHandler CanExecuteChanged;
-
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
         public bool CanExecute(object parameter)
         {
-            return action != null || func != null;
+            if (func != null)
+                return func(parameter);
+            return true;
         }
 
         public void Execute(object parameter)

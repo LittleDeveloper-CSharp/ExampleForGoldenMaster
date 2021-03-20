@@ -5,44 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExampleForGoldenMaster.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Салон красоты Мордочка" Height="450" Width="800" Icon="/Resources/beauty_logo.ico" Name="Windows">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding GetServices}" SelectedItem="{Binding Service}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding GetServices}" SelectedItem="{Binding Service}" Name="ListServices">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Image Margin="10" Grid.Column="0" Source="{Binding FullImagePath}"/>
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <StackPanel>
-                                    <TextBlock Text="Наименование услуги"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Cost}" Visibility="{Binding HaveDiscont}"/> <!--То что можно скрыть-->
-                                        <TextBlock Text="{Binding TotalCost}"/> <!--То что нельзя скрывать-->
-                                        <TextBlock Visibility="{Binding HaveDiscont}" Text="{Binding Discount}"/>
-                                    </StackPanel>
+                    <Border BorderBrush="Gray" BorderThickness="1" Background="{Binding ColorBackground}">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="{Binding Title}"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Cost}" Visibility="{Binding HaveDiscont}"/>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} рублей за {1} минут">
+                                                <Binding Path="TotalCost"/>
+                                                <Binding Path="DurationInMinutes"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock Visibility="{Binding HaveDiscont}" Text="{Binding StringFormat=*скидка {0}%, Path=Discount}"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="Редактировать" Visibility="{Binding IsAdmin}"/>
-                                    <Button Content="Удалить" Visibility="{Binding IsAdmin}"/>
-                                </StackPanel>
-                            </Grid>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="{Binding VisibilityButtonForEdit}">
+                                <Button Margin="0 0 10 0" Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=local:MainWindow}}" 
+                                        Background="White" Content="Редактировать" BorderBrush="Gray" CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                <Button Content="Удалить" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=local:MainWindow}}" 
+                                        Background="White" BorderBrush="Gray" CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                <!--{RelativeSource Mode=TemplatedParent}-->
+                            </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <UniformGrid Grid.Column="1" Rows="3">
+            <GroupBox Header="Фильтры">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="Размер скидки"/>
+                    <ComboBox ItemsSource="{Binding Discounts}" SelectedItem="{Binding GetDiscount}" DisplayMemberPath="NameValue"/>
+                    <TextBlock Text="Название"/>
+                    <TextBox Text="{Binding GetName, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Панель админа"/>
+                <TextBox Text="{Binding GetPassword, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <Button Command="{Binding AddCommand}" Content="Добавить услугу" VerticalAlignment="Bottom" Margin="2 10"/>
+        </UniformGrid>
     </Grid>
 </Window>
