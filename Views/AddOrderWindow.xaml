@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExampleForGoldenMaster.ViewModel"
         mc:Ignorable="d"
-        Title="AddOrderWindow" Height="155" Width="660">
+        Title="AddOrderWindow" Height="155" Width="939.355">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -36,11 +36,11 @@
             <DatePicker SelectedDate="{Binding GetDateTime}" SelectedDateFormat="Short"/>
             <TextBlock Text="Время: " VerticalAlignment="Center"/>
             <TextBox Text="{Binding GetTime, UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
-            <TextBlock Text="{Binding StringFormat=Время окончания услуги}"/>
+            <TextBlock Text="{Binding StringFormat={}Время окончания услуги: {0}, Path=EndTime}"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
-            <Button Content="Добавить" Command="{Binding AddOrderCommand, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Content="Отмена"/>
+            <Button Content="Добавить" Command="{Binding AddOrderCommand}"/>
+            <Button Content="Отмена" Command="{Binding BackCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

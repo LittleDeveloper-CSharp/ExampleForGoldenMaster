@@ -39,7 +39,7 @@
         </UniformGrid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
             <Button Content="Добавить" Command="{Binding AddCommand}"/>
-            <Button Content="Отмена" Command="{Binding DeleteCommand}"/>
+            <Button Content="Отмена" Command="{Binding BackCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

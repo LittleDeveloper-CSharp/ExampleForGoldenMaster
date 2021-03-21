@@ -28,6 +28,7 @@ namespace ExampleForGoldenMaster.ViewModel
                         }
                         else
                             model.Entry(GetService).State = System.Data.Entity.EntityState.Modified;
+                        Application.Current.Windows[2].Close();
                         model.SaveChanges();
                         OnPropertyChanged("GetServices");
                     });
@@ -43,14 +44,14 @@ namespace ExampleForGoldenMaster.ViewModel
                 {
                     backCommand = new Command.CommonCommand(x =>
                     {
-
+                        Application.Current.Windows[2].Close();
                     });
                 }
                 return backCommand;
             }
         }
 
-        public Model.Service GetService { get => getService; 
+        public Service GetService { get => getService; 
             set 
             { 
                 getService = value;

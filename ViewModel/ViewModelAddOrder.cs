@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace ExampleForGoldenMaster.ViewModel
 {
     class ViewModelAddOrder : ViewModelCommon
     {
         private Service service;
-        private ClientService clientService;
         private Client client;
         private Command.CommonCommand addOrderCommand;
+        private Command.CommonCommand backCommand;
         private DateTime date = DateTime.Parse(DateTime.Now.ToShortDateString());
         private string time = "00:00";
 
@@ -24,12 +25,26 @@ namespace ExampleForGoldenMaster.ViewModel
                     {
                         clientService.Service = service;
                         clientService.Client = client;
-                        model.ClientServices.Add(clientService);
+                        Application.Current.Windows[2].Close();
                         model.SaveChanges();
-                        
                     });
                 }
                 return addOrderCommand;
+            }
+        }
+
+        public Command.CommonCommand BackCommand
+        {
+            get
+            {
+                if(backCommand == null)
+                {
+                    backCommand = new Command.CommonCommand(x =>
+                    {
+                        Application.Current.Windows[2].Close();
+                    });
+                }
+                return backCommand;
             }
         }
 
@@ -42,23 +57,16 @@ namespace ExampleForGoldenMaster.ViewModel
                 OnPropertyChanged(nameof(GetService));
             } 
         }
-        
-        public ClientService GetClientService
-        {
-            get => clientService;
-            set
-            {
-                clientService = value;
-                OnPropertyChanged(nameof(GetClientService));
-            }
-        }
+
+        private ClientService clientService;
 
 
         public ViewModelAddOrder()
         {
             GetService = Service;
             GetClient = GetClients[0];
-            GetClientService = new ClientService();
+            clientService = new ClientService();
+            model.Entry(clientService).State = System.Data.Entity.EntityState.Added;
         }
 
         public List<Client> GetClients { get => model.Clients.ToList(); } 
@@ -93,6 +101,17 @@ namespace ExampleForGoldenMaster.ViewModel
             }
         }
 
+        private string endTime;
+        public string EndTime
+        {
+            get => endTime;
+            set
+            {
+                endTime = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void CancatTimeWithDate()
         {
             var valueTime = time.Split(':', '.').Select(x => int.Parse(x)).ToArray();
@@ -100,6 +119,8 @@ namespace ExampleForGoldenMaster.ViewModel
             {
                 DateTime dateTime = new DateTime(date.Year, date.Month, date.Day, valueTime[0], valueTime[1], 0);
                 clientService.StartTime = dateTime;
+                dateTime = dateTime.AddMinutes(service.DurationInMinutes);
+                EndTime = $"{dateTime.Hour}:{dateTime.Minute}";
             }
         }
     }

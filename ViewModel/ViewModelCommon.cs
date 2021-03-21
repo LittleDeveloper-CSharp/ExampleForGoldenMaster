@@ -14,7 +14,7 @@ namespace ExampleForGoldenMaster.ViewModel
             model.Services.Load();
         }
 
-        protected readonly ContextModel model = new ContextModel();
+        protected static readonly ContextModel model = new ContextModel();
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string name = "") 
