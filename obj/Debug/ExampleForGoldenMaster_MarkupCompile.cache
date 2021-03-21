@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\
+C:\Users\Popka\source\repos\ExampleForGoldenMaster\obj\Debug\
 ExampleForGoldenMaster
 none
 false
 DEBUG;TRACE
-C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\App.xaml
+C:\Users\Popka\source\repos\ExampleForGoldenMaster\App.xaml
 3-1613802710
 
-17-41189527
-20681361307
+18-795759311
+20-796643077
 Views\AddOrderWindow.xaml;Views\EditAndAddWindow.xaml;Views\MainWindow.xaml;
 
-False
+True
 

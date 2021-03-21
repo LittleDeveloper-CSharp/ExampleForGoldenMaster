@@ -9,6 +9,10 @@ using System.Windows.Controls;
 
 namespace ExampleForGoldenMaster.ViewModel
 {
+    /// <summary>
+    /// Класс, который передается в DataContext MainWindow
+    /// Типа пасхалка : https://cdn.idaprikol.ru/images/09ad214b47d3d119c0857946da4ff87665c6d511930ad9bc2be3b744dc986885_1.jpg
+    /// </summary>
     class ViewModelMainWindow : ViewModelCommon
     {
         private ObservableCollection<Service> services;
@@ -17,11 +21,17 @@ namespace ExampleForGoldenMaster.ViewModel
         private string name = "";
         private string password = "";
 
+        /// <summary>
+        /// Команды для кнопок
+        /// </summary>
         private CommonCommand addCommand;
         private CommonCommand editCommand;
         private CommonCommand deleteCommand;
         private CommonCommand backCommand;
 
+        /// <summary>
+        /// Когда пароль правильный, открывается панель одмена
+        /// </summary>
         public Visibility IsAdmin { get => isAdmin; 
             set 
             { 
@@ -30,16 +40,23 @@ namespace ExampleForGoldenMaster.ViewModel
             } 
         }
 
+        /// <summary>
+        /// Когда ты нажимаешь на элемент ListView, то срабатывает это свойство 
+        /// </summary>
         public Service GetWriteOrder
         {
             set 
             {
+                //А вот и передача в родительский класс свойство
                 Service = value;
                 Views.AddOrderWindow window = new Views.AddOrderWindow();
                 window.ShowDialog();
             }
         }
 
+        /// <summary>
+        /// Простая реализация команды для кнопки выключения режима админа
+        /// </summary>
         public CommonCommand BackCommand 
         {
             get
@@ -49,6 +66,7 @@ namespace ExampleForGoldenMaster.ViewModel
                     backCommand = new CommonCommand(obj => 
                     {
                         IsAdmin = Visibility.Hidden;
+                        GetPassword = "";
                         OnPropertyChanged(nameof(GetServices));
                     });
                 }
@@ -56,6 +74,9 @@ namespace ExampleForGoldenMaster.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда для редактирования
+        /// </summary>
         public CommonCommand EditCommand 
         { 
             get 
@@ -63,8 +84,10 @@ namespace ExampleForGoldenMaster.ViewModel
                 if (editCommand is null)
                     editCommand = new CommonCommand(obj => 
                     {
+                        // А тут самое интересное, короче, тут мы получаем то к чему у нас относиться объект, то есть контейнер
                         var content = obj as ContentPresenter;
                         var item = content.DataContext as Service;
+                        // Опять передача в родительский)
                         Service = item;
                         Views.EditAndAddWindow window = new Views.EditAndAddWindow();
                         window.ShowDialog();
@@ -73,6 +96,9 @@ namespace ExampleForGoldenMaster.ViewModel
             } 
         }
 
+        /// <summary>
+        /// Команда на удаление объекта
+        /// </summary>
         public CommonCommand DeleteCommand 
         { 
             get
@@ -82,8 +108,10 @@ namespace ExampleForGoldenMaster.ViewModel
                     {
                         if (MessageBox.Show("Вы действительно хотите удалить?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
+                            //Та же схеме, что и в предыдущем
                             var content = obj as ContentPresenter;
                             var item = content.DataContext as Service;
+                            //А вот и использование модели из родительского класса, так как у нас модель помеча static, то эта фигня у нас в единственным экземпляре)
                             model.ClientServices.Load();
                             if (!model.ClientServices.Local.Where(x => x.ServiceID == item.ID).Any())
                             {
@@ -97,6 +125,9 @@ namespace ExampleForGoldenMaster.ViewModel
                 return deleteCommand;
             } 
         }
+        /// <summary>
+        /// Команда на добавление объекта
+        /// </summary>
         public CommonCommand AddCommand
         {
             get
@@ -104,6 +135,7 @@ namespace ExampleForGoldenMaster.ViewModel
                 if (addCommand is null)
                     addCommand = new CommonCommand(obj => 
                     {
+                        //Тут просто новый объект передаём
                         Service = new Service();
                         Views.EditAndAddWindow window = new Views.EditAndAddWindow();
                         window.ShowDialog();
@@ -115,6 +147,7 @@ namespace ExampleForGoldenMaster.ViewModel
         public ViewModelMainWindow()
         {
             GetServices = model.Services.Local;
+            //Типа класс скидка, с мыслью, а почему бы и нет (Мне так было проще) ))))
             Discounts = new List<Discount>
             {
                 new Discount{NameValue = "Все", minValue = 0, maxValue = 0},
@@ -126,6 +159,9 @@ namespace ExampleForGoldenMaster.ViewModel
             discount = Discounts[0];
         }
 
+        /// <summary>
+        /// Все, что ниже мне лень расписывать)
+        /// </summary>
         public List<Discount> Discounts { get; set; }
         
         public string GetName 
@@ -162,6 +198,9 @@ namespace ExampleForGoldenMaster.ViewModel
             }
         }
 
+        /// <summary>
+        /// Все кроме этого, здесь получается мы просто фильтруем)
+        /// </summary>
         private void FilterServices()
         {
             var item = model.Services.Local.ToList();
@@ -175,6 +214,9 @@ namespace ExampleForGoldenMaster.ViewModel
             GetServices = new ObservableCollection<Service>(item);
         }
 
+        /// <summary>
+        /// А тут мы просто выводи инфу (опять)
+        /// </summary>
         public ObservableCollection<Service> GetServices 
         {
             get 

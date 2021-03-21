@@ -4,6 +4,9 @@ using System.Windows;
 
 namespace ExampleForGoldenMaster.ViewModel
 {
+    /// <summary>
+    /// Тут вроде все понято... наверное...
+    /// </summary>
     class ViewModelAddAndEdit : ViewModelCommon
     {
         private Command.CommonCommand addCommand;

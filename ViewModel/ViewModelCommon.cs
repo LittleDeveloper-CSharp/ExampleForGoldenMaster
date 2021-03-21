@@ -5,6 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace ExampleForGoldenMaster.ViewModel
 {
+    /// <summary>
+    /// Это класс нужен для хранения и передачи значений свойст (в частности услугу) между другими классами
+    /// Так же для реализации интерфейса (INotifyPropertyChanged) на измение свойст 
+    /// А ну и для единственного контекста данных)))))
+    /// </summary>
     class ViewModelCommon : INotifyPropertyChanged
     {
         private static Service service;

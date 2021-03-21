@@ -6,6 +6,9 @@ using System.Windows;
 
 namespace ExampleForGoldenMaster.ViewModel
 {
+    /// <summary>
+    /// А тут я просто разбил на свойста объект и при добавлении в базу собираю в один
+    /// </summary>
     class ViewModelAddOrder : ViewModelCommon
     {
         private Service service;
@@ -25,7 +28,7 @@ namespace ExampleForGoldenMaster.ViewModel
                     {
                         clientService.Service = service;
                         clientService.Client = client;
-                        Application.Current.Windows[2].Close();
+                        Application.Current.Windows[2].Close(); // Эта фигня была найдена в инете, работает только с 2
                         model.SaveChanges();
                     });
                 }
@@ -41,7 +44,7 @@ namespace ExampleForGoldenMaster.ViewModel
                 {
                     backCommand = new Command.CommonCommand(x =>
                     {
-                        Application.Current.Windows[2].Close();
+                        Application.Current.Windows[2].Close(); // Эта фигня была найдена в инете, работает только с 2 (типа у нас новое окно идет под номером 2)
                     });
                 }
                 return backCommand;
@@ -112,6 +115,7 @@ namespace ExampleForGoldenMaster.ViewModel
             }
         }
 
+        //Какая-то хитрая штука
         private void CancatTimeWithDate()
         {
             var valueTime = time.Split(':', '.').Select(x => int.Parse(x)).ToArray();
