@@ -20,6 +20,41 @@ namespace ExampleForGoldenMaster.ViewModel
         private CommonCommand addCommand;
         private CommonCommand editCommand;
         private CommonCommand deleteCommand;
+        private CommonCommand backCommand;
+
+        public Visibility IsAdmin { get => isAdmin; 
+            set 
+            { 
+                isAdmin = value;
+                OnPropertyChanged(nameof(IsAdmin));
+            } 
+        }
+
+        public Service GetWriteOrder
+        {
+            set 
+            {
+                Service = value;
+                Views.AddOrderWindow window = new Views.AddOrderWindow();
+                window.ShowDialog();
+            }
+        }
+
+        public CommonCommand BackCommand 
+        {
+            get
+            {
+                if (backCommand is null)
+                {
+                    backCommand = new CommonCommand(obj => 
+                    {
+                        IsAdmin = Visibility.Hidden;
+                        OnPropertyChanged(nameof(GetServices));
+                    });
+                }
+                return backCommand;
+            }
+        }
 
         public CommonCommand EditCommand 
         { 
@@ -37,7 +72,6 @@ namespace ExampleForGoldenMaster.ViewModel
                 return editCommand;
             } 
         }
-        int i = 0;
 
         public CommonCommand DeleteCommand 
         { 
@@ -111,7 +145,7 @@ namespace ExampleForGoldenMaster.ViewModel
             {
                 if (value == "0000")
                 {
-                    isAdmin = Visibility.Visible;
+                    IsAdmin = Visibility.Visible;
                     OnPropertyChanged(nameof(GetServices));
                 }
                 password = value;

@@ -55,3 +55,6 @@ C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGolden
 C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\ExampleForGoldenMaster.csproj.CopyComplete
 C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\ExampleForGoldenMaster.exe
 C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\ExampleForGoldenMaster.pdb
+C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\ExampleForGoldenMaster.csprojAssemblyReference.cache
+C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\Views\EditAndAddWindow.g.cs
+C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Debug\Views\EditAndAddWindow.baml

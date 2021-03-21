@@ -75,8 +75,12 @@
     <Compile Include="Model\ContextModel.cs" />
     <Compile Include="Model\Discount.cs" />
     <Compile Include="Model\Service.cs" />
+    <Compile Include="Views\AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Command\CommonCommand.cs" />
     <Compile Include="ViewModel\ViewModelAddAndEdit.cs" />
+    <Compile Include="ViewModel\ViewModelAddOrder.cs" />
     <Compile Include="ViewModel\ViewModelCommon.cs" />
     <Compile Include="ViewModel\ViewModelMainWindow.cs" />
     <Compile Include="Views\EditAndAddWindow.xaml.cs">
@@ -117,6 +121,10 @@
     <Resource Include="Resources\beauty_logo.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditAndAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

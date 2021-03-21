@@ -21,3 +21,5 @@ C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGolden
 C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Release\ExampleForGoldenMaster.csprojAssemblyReference.cache
 C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Release\Views\EditAndAddWindow.g.cs
 C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Release\Views\EditAndAddWindow.baml
+C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Release\Views\AddOrderWindow.g.cs
+C:\Users\Шоколадка\Source\Repos\LittleDeveloper-CSharp\ExampleForGoldenMaster\obj\Release\Views\AddOrderWindow.baml

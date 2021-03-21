@@ -11,7 +11,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
-        <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding GetServices}" SelectedItem="{Binding Service}" Name="ListServices">
+        <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding GetServices}" SelectedItem="{Binding GetWriteOrder}" Name="ListServices">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" Background="{Binding ColorBackground}">
@@ -59,6 +59,7 @@
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Панель админа"/>
                 <TextBox Text="{Binding GetPassword, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Visibility="{Binding IsAdmin}" Content="Назад" Command="{Binding BackCommand}"/>
             </StackPanel>
             <Button Command="{Binding AddCommand}" Content="Добавить услугу" VerticalAlignment="Bottom" Margin="2 10"/>
         </UniformGrid>

@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExampleForGoldenMaster.Views"
         mc:Ignorable="d"
-        Title="EditAndAddWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="EditAndAddWindow" Height="450" Width="180">
+    <Grid HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="380*"/>
+            <RowDefinition Height="39*"/>
+        </Grid.RowDefinitions>
+        <UniformGrid Rows="7" DataContext="{Binding GetService}" >
+            <StackPanel>
+                <TextBlock Text="Наименование"/>
+                <TextBox Text="{Binding Title}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Стоимость"/>
+                <TextBox Text="{Binding Cost}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Длительность"/>
+                <TextBox Text="{Binding DurationInMinutes}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Описание"/>
+                <TextBox Text="{Binding Description}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Скидку"/>
+                <TextBox Text="{Binding Discount}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Индентификатор"/>
+                <TextBox Text="{Binding ID}"/>
+            </StackPanel>
+        </UniformGrid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Content="Добавить" Command="{Binding AddCommand}"/>
+            <Button Content="Отмена" Command="{Binding DeleteCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>
